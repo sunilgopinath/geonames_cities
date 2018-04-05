@@ -13,4 +13,4 @@ ${pg_cmd} -c "ALTER ROLE geonames_user superuser;"
 ${pg_cmd} -c "CREATE DATABASE geonames_sunil ENCODING 'UTF8';"
 ${pg_cmd} -c "GRANT ALL PRIVILEGES ON DATABASE geonames_sunil TO geonames_user;"
 
-cat sql/create_table.sql | ${pg_cmd} -d aiohttpdemo_polls -a
+cat sql/create_table.sql | ${pg_cmd} -d geonames_sunil -a

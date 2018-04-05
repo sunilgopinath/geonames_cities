@@ -1,6 +1,6 @@
 import pathlib
 
-from .handlers import city, neighbors, healthCheck
+from .handlers import city, healthCheck, neighbors
 
 
 PROJECT_ROOT = pathlib.Path(__file__).parent

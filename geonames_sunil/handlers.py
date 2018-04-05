@@ -32,6 +32,7 @@ async def neighbors(request):
 
     return web.json_response(json.dumps([dict(ob) for ob in results]))
 
+
 async def healthCheck(request):
     """Return 200 to say the application is healthy.
 

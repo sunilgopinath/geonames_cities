@@ -42,9 +42,7 @@ async def get_neighbors(conn, longitude, latitude, number):
 
     """
     results = await conn.fetch(
-        'SELECT * from cities order by geom <-> ST_SetSRID(ST_MakePoint($1, $2), 4326) limit $3',
-        longitude,
-        latitude,
+        'SELECT * from cities order by geom <-> ST_SetSRID(ST_MakePoint($1, $2), 4326) limit $3', longitude, latitude,
         number
     )
     if not results:

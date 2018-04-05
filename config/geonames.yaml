@@ -1,6 +1,6 @@
 postgres:
-  database: test
-  user: sunilgopinath
+  database: geonames_sunil
+  user: geonames_user
   password: password
   host: localhost
   port: 5432

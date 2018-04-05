@@ -4,6 +4,7 @@ import subprocess
 import pytest
 from geonames_sunil.main import init
 
+
 BASE_DIR = pathlib.Path(__file__).parent.parent
 
 

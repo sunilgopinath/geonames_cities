@@ -3,7 +3,7 @@
 FLAGS=
 
 isort:
-	isort --recursive --quiet geonames_sunil/ tests/ setup.py  # --check-only
+	isort --recursive --quiet geonames_sunil/ insert/ tests/ setup.py  # --check-only
 
 pytest:
 	py.test --cov=loader
@@ -26,6 +26,6 @@ clean:
 	rm -rf dist
 
 yapf:
-	yapf --recursive --in-place setup.py geonames_sunil/ tests/
+	yapf --recursive --in-place setup.py geonames_sunil/ tests/ insert/
 
 .PHONY: flake isort clean test yapf pytest

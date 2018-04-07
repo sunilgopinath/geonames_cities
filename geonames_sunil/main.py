@@ -4,9 +4,9 @@ import logging
 import sys
 
 import aiozipkin as az
+from aiohttp import web
 from trafaret_config import commandline
 
-from aiohttp import web
 from geonames_sunil.db import close_pg, init_pg
 from geonames_sunil.routes import setup_routes
 from geonames_sunil.utils import TRAFARET

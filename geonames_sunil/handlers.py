@@ -1,7 +1,6 @@
 import json
 
 import aiozipkin as az
-
 from aiohttp import web
 
 from . import db

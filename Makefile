@@ -23,7 +23,7 @@ load:
 	./load.sh & echo $! > pid.txt
 
 pytest:
-	py.test --cov=insert
+	py.test
 
 test: isort yapf pytest
 

@@ -2,7 +2,7 @@
 SECONDS=0
 echo "Starting to load records..."
 sh ./sql/install.sh
-python insert/loader.py
+python insert/loader.py --e prod
 sh ./sql/post_process.sh
 echo "Finished loading records."
 duration=$SECONDS

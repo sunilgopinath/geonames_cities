@@ -4,7 +4,6 @@ import configparser
 import csv
 import logging
 import os
-import sys
 import time
 
 import asyncpg

@@ -3,7 +3,6 @@ Integration tests. They need a running database.
 
 Beware, they destroy your db using sudo.
 """
-import asyncio
 import os
 
 import pytest

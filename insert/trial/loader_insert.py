@@ -1,13 +1,10 @@
 import asyncio
 import csv
-import datetime
 import logging
 import os
-import sys
 import time
 
 import asyncpg
-from shapely.geometry import Point
 
 import config
 

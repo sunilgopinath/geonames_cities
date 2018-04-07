@@ -1,13 +1,11 @@
-import asyncio
 import configparser
 import os
-import subprocess
 
 import asyncpg
 import pytest
 
-from conftest import BASE_DIR, run
-from insert.loader import get_files, read_files
+from conftest import BASE_DIR
+from insert.loader import read_files
 
 
 @pytest.mark.asyncio

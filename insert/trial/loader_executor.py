@@ -1,11 +1,8 @@
 import asyncio
 import concurrent.futures
-import csv
-import io
 import os
 import time
 
-import psycopg2
 from psycopg2.pool import ThreadedConnectionPool
 
 import config

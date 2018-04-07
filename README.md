@@ -130,4 +130,4 @@ make: ./sql/single_file.sh: Permission denied
 make: *** [load-as-single-file] Error 1
 chmod a+rx sql/single_file.sh
 ```
-2. Script seems to have finished loading but program still running. Hopefully it is just the index creation taking a very long time
+2. Database load completed but program still running. Hopefully it is just the index creation taking a very long time

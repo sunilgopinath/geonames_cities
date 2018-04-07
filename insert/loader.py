@@ -1,11 +1,15 @@
 import asyncio
 import csv
+import logging
 import os
 import time
 
 import asyncpg
 
 import config
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+logger = logging.getLogger(__name__)
 
 
 async def get_files(startdir):
@@ -14,6 +18,7 @@ async def get_files(startdir):
 
     """
     if os.path.exists(startdir) == False:
+        logger.error("OS error: {0}".format(startdir))
         raise OSError(2, 'No such file or directory', startdir)
 
     return [os.path.join(dirpath, f) for dirpath, _, filenames in os.walk(startdir) for f in filenames]

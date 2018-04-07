@@ -3,6 +3,7 @@ import asyncio
 import logging
 import sys
 
+import aiozipkin as az
 from trafaret_config import commandline
 
 from aiohttp import web
@@ -11,7 +12,7 @@ from geonames_sunil.routes import setup_routes
 from geonames_sunil.utils import TRAFARET
 
 
-def init(loop, argv):
+async def init(argv):
     ap = argparse.ArgumentParser()
     commandline.standard_argparse_options(ap, default_config='./config/geonames.yaml')
     #
@@ -22,7 +23,13 @@ def init(loop, argv):
     config = commandline.config_from_options(options, TRAFARET)
 
     # setup application and extensions
-    app = web.Application(loop=loop)
+    app = web.Application()
+
+    endpoint = az.create_endpoint('aiohttp_server', ipv4='127.0.0.1', port=9001)
+
+    zipkin_address = 'http://127.0.0.1:9411'
+    tracer = await az.create(zipkin_address, endpoint, sample_rate=1.0)
+    az.setup(app, tracer)
 
     # load config from yaml file in current dir
     app['config'] = config
@@ -43,7 +50,7 @@ def main(argv):
 
     loop = asyncio.get_event_loop()
 
-    app = init(loop, argv)
+    app = loop.run_until_complete(init(argv))
     web.run_app(app, host=app['config']['host'], port=app['config']['port'])
 
 

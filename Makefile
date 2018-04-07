@@ -17,10 +17,13 @@ install-deps: ensure_env
 	./env/bin/pip install -r requirements.txt
 
 isort:
-	isort --recursive --quiet geonames_sunil/ insert/ tests/ setup.py  # --check-only
+	isort --recursive --quiet geonames_sunil/ insert/ tests/ monitor.py setup.py  # --check-only
+
+load:
+	./load.sh & echo $! > pid.txt
 
 pytest:
-	py.test --cov=loader
+	py.test --cov=insert
 
 test: isort yapf pytest
 
@@ -40,6 +43,6 @@ clean:
 	rm -rf dist
 
 yapf:
-	yapf --recursive --in-place setup.py geonames_sunil/ tests/ insert/
+	yapf --recursive --in-place geonames_sunil/ insert/ tests/ monitor.py setup.py
 
-.PHONY: flake isort install-deps clean test yapf pytest 
+.PHONY: flake isort install-deps clean test yapf pytest load

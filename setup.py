@@ -22,7 +22,7 @@ install_requires = ['aiohttp', 'asyncpg', 'trafaret-config']
 setup(
     name='geonames_sunil',
     version=read_version(),
-    description='Primer AI Distributed Computing Challenge',
+    description='Geonames Fun',
     platforms=['POSIX'],
     packages=find_packages(),
     include_package_data=True,

@@ -5,10 +5,10 @@ import io
 import os
 import time
 
-import config
 import psycopg2
 from psycopg2.pool import ThreadedConnectionPool
 
+import config
 
 tcp = ThreadedConnectionPool(1, 10, config.DSN)
 

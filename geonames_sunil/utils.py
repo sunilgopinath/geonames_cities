@@ -1,6 +1,5 @@
 import trafaret as T
 
-
 TRAFARET = T.Dict(
     {
         T.Key('postgres'):

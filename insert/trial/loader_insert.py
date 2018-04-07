@@ -26,7 +26,7 @@ async def run(conn):
         '''
     )
     files = await get_files(config.DIRECTORY)
-    [await process_files(f, stmt) for f in files]
+    [ await process_files(f, stmt) for f in files]
     await cleanup(conn)
 
 

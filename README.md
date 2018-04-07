@@ -1,4 +1,4 @@
-# PrimerAI Distributed Computing Challenge
+# Geonames Data
 
 Primer Distributed Computing Challenge. Here I detail how to run the challenge and my thought processes.
 
@@ -107,7 +107,7 @@ COPY cities from PROGRAM 'cut -f1,3,5,6,9,11,12 <PLACEHOLDER_TEXT>'  null  as  '
 
 TO 
 ...
-COPY cities from PROGRAM 'cut -f1,3,5,6,9,11,12 /Users/sunilgopinath/Interview/PrimerAI/allCountries.txt'  null  as  '';
+COPY cities from PROGRAM 'cut -f1,3,5,6,9,11,12 /Users/sunilgopinath/geonames/allCountries.txt'  null  as  '';
 ...
 ```
 3. Inspect the `sql/single_file.sh` and make sure the credentials are acceptable.

@@ -1,18 +1,27 @@
 import json
 
+import aiozipkin as az
+
 from aiohttp import web
 
 from . import db
 
 
 async def city(request):
-    city_name = request.match_info['city_name']
-    try:
-        results = await db.get_city(request.app['db'], city_name.title())
-    except db.RecordNotFound as e:
-        raise web.HTTPNotFound(text=str(e))
+    tracer = az.get_tracer(request.app)
+    span = az.request_span(request)
 
-    return web.json_response(json.dumps([dict(ob) for ob in results]))
+    with tracer.new_child(span.context) as child_span:
+        child_span.name('postgres:select')
+        # call to external service like https://python.org
+        # or database query
+        city_name = request.match_info['city_name']
+        try:
+            results = await db.get_city(request.app['db'], city_name.title())
+        except db.RecordNotFound as e:
+            raise web.HTTPNotFound(text=str(e))
+
+        return web.json_response(json.dumps([dict(ob) for ob in results]))
 
 
 async def neighbors(request):

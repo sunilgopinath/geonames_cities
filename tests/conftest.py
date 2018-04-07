@@ -1,23 +1,14 @@
+import os
 import pathlib
 import subprocess
 
 import pytest
+
 from geonames_sunil.main import init
 
-
 BASE_DIR = pathlib.Path(__file__).parent.parent
-
-
-@pytest.fixture
-def config_path():
-    path = BASE_DIR / 'config' / 'geonames.yaml'
-    return path.as_posix()
-
-
-@pytest.fixture
-def cli(loop, test_client, config_path):
-    app = init(loop, ['-c', config_path])
-    return loop.run_until_complete(test_client(app))
+# Prepend src directory to python path
+root = os.path.dirname(os.path.realpath(__file__))
 
 
 @pytest.fixture

@@ -6,14 +6,11 @@ FLAGS=
 
 create_venv:
 	python3 -m virtualenv env
-	
-start_venv:
-	source env/bin/activate
 
-ensure_env:
-	test -d venv || virtualenv -p $(python_base_path) $(virtualenv_dir)
+install:
+	./env/bin/pip install -e .
 
-install-deps: ensure_env
+install-deps:
 	./env/bin/pip install -r requirements.txt
 
 isort:
@@ -21,6 +18,9 @@ isort:
 
 load:
 	./load.sh
+
+load-as-single-file:
+	./sql/single_file.sh
 
 pytest:
 	py.test
@@ -45,4 +45,4 @@ clean:
 yapf:
 	yapf --recursive --in-place geonames_sunil/ insert/ tests/ monitor.py setup.py
 
-.PHONY: flake isort install-deps clean test yapf pytest load
+.PHONY: flake isort install-deps clean test yapf pytest load load-as-single-file

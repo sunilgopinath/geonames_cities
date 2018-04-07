@@ -17,7 +17,7 @@ def read_version():
             raise RuntimeError(msg)
 
 
-install_requires = ['aiohttp', 'asyncpg', 'trafaret-config']
+install_requires = ['aiohttp', 'asyncpg', 'Shapely', 'trafaret-config']
 
 setup(
     name='geonames_sunil',

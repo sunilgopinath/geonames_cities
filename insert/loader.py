@@ -65,7 +65,6 @@ async def main():
     else:
         raise ValueError('Invalid environment name')
 
-
     # setup db connection
     pool = await asyncpg.create_pool(
         host=config['DATABASE_CONFIG']['HOST'],

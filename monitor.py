@@ -3,7 +3,7 @@ import os
 import sys
 import time
 
-FILE_NAME = './out.txt'
+FILE_NAME = './pid.txt'
 
 
 def is_process_running(process_id):
@@ -55,10 +55,11 @@ def checkProcess(process_id, time_limit):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
+    parser.add_argument("--pid", "-p", type=str, required=True)
     parser.add_argument("--time", "-t", type=int, required=True)
     args = parser.parse_args()
 
-    file_name = FILE_NAME
+    file_name = args.pid
     time_limit = args.time
 
     process_id = readFile(file_name)

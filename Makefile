@@ -20,7 +20,7 @@ isort:
 	isort --recursive --quiet geonames_sunil/ insert/ tests/ monitor.py setup.py  # --check-only
 
 load:
-	./load.sh & echo $! > pid.txt
+	./load.sh
 
 pytest:
 	py.test

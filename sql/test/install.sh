@@ -6,6 +6,7 @@ case "${unameOut}" in
 esac
 
 ${pg_cmd} -c "DROP DATABASE IF EXISTS geonames_sunil_test"
+${pg_cmd} -c "REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM geonames_user;"
 ${pg_cmd} -c "DROP ROLE IF EXISTS geonames_user"
 ${pg_cmd} -c "CREATE USER geonames_user WITH PASSWORD 'password';"
 # needed to create postgis extension

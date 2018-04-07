@@ -1,6 +1,6 @@
 # Playing around with Geonames
 
-Primer Distributed Computing Challenge. Here I detail how to run the challenge and my thought processes.
+Looking at the geonames dataset
 
 # Pre-requisites
 
@@ -16,12 +16,12 @@ Primer Distributed Computing Challenge. Here I detail how to run the challenge a
 $> git clone git@github.com:sunilgopinath/geonames_cities.git
 geoname_cities$> cd geoname_cities
 geoname_cities$> vim insert/config-prod.ini (add the location of the directory)
-geoname_cities$> python3 -m virtualenv env
+geoname_cities$> make create_venv
 geoname_cities$> source env/bin/activate
-geoname_cities$> pip install -e .
-geoname_cities$> make load
-make load
-./load.sh & echo  > pid.txt
+geoname_cities$> make install
+geoname_cities$> make load & echo $! > pid.txt
+[1] 84944
+./load.sh
 Starting to load records...
 ...
 
@@ -37,7 +37,7 @@ Records loaded in 11 minutes and 20 seconds.
 
 ### To run tests
 ```sh
-geoname_cities$> pip install -r requirements.txt
+geoname_cities$> make install-deps
 geoname_cities$> make test
 make test
 ...
@@ -99,8 +99,35 @@ geoname_cities$> curl -H "Content-Type: application/json" 'http://localhost:8080
   },
   ...
 ```
-Visit http://localhost:16686/search and search on `geonames_app` and find your GETs ('postgres:select:get_neighbors', 'postgres:select:get_city')
+Visit http://localhost:16686/search and search on `geonames_app` and find your GETs ('postgres:select:get_neighbors', 'postgres:select:get_city'). This is to illustrate that POSTGIS can answer these questions very quickly.
+
+### Single file load
+
+- single 12m record file
+
+1. Find the file `sql/single_file.sql`
+2. Replace <PLACEHOLDER_TEXT> with full path to file eg:
+```
+COPY cities from PROGRAM 'cut -f1,3,5,6,9,11,12 <PLACEHOLDER_TEXT>'  null  as  '';
+
+TO 
+...
+COPY cities from PROGRAM 'cut -f1,3,5,6,9,11,12 ~/allCountries.txt'  null  as  '';
+...
+```
+3. Inspect the `sql/single_file.sh` and make sure the credentials are acceptable.
+4. Ensure you are in the root directory
+```sh
+$> make load-as-single-file
+```
 
 ### Troubleshooting
 1. `.sh` files do not load. Set permission ex: `chmod a+rx <file_name>.sh`
+```sh
+make load-as-single-file
+./sql/single_file.sh
+make: ./sql/single_file.sh: Permission denied
+make: *** [load-as-single-file] Error 1
+chmod a+rx sql/single_file.sh
+```
 2. Script seems to have finished loading but program still running. Hopefully it is just the index creation taking a very long time

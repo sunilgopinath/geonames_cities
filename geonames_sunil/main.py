@@ -25,7 +25,7 @@ async def init(argv):
     # setup application and extensions
     app = web.Application()
 
-    endpoint = az.create_endpoint('aiohttp_server', ipv4='127.0.0.1', port=9001)
+    endpoint = az.create_endpoint('geonames_app', ipv4='127.0.0.1', port=9001)
 
     zipkin_address = 'http://127.0.0.1:9411'
     tracer = await az.create(zipkin_address, endpoint, sample_rate=1.0)
